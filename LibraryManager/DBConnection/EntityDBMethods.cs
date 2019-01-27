@@ -191,9 +191,9 @@ namespace LibraryManager.DBConnection
         {
             using (var context = new LibraryContext())
             {
-                var book = context.Authors.Find(authorId);
+                var author = context.Authors.Find(authorId);
 
-                if (book == null)
+                if (author == null)
                     return false;
 
                 else
