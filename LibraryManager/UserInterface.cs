@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 using LibraryManager.Model;
 
 namespace LibraryManager
@@ -168,18 +167,26 @@ namespace LibraryManager
             Console.Write("Inserisci l'id del libro: ");
             int idBook = Convert.ToInt32(Console.ReadLine());
 
-            List<Store> myStores = processor.ShowStores(idBook);
+            bool controlExistingBook = processor.ExistenceBook(idBook);
 
-            if (myStores.Capacity == 0)
-                Console.WriteLine("Nessun negozio disponibile!\n");
+            if (controlExistingBook)
+            {
+                List<Store> myStores = processor.ShowStores(idBook);
+
+                if (myStores.Capacity == 0)
+                    Console.WriteLine("Nessun negozio disponibile per questo libro!\n");
+
+                else
+                {
+                    Console.WriteLine("\nI negozi disponibili per il libro sono:\n");
+
+                    foreach (var item in myStores)
+                        Console.WriteLine(item.NameStore);
+                }
+            }
 
             else
-            {
-                Console.WriteLine("\nI negozi disponibili per il libro sono:\n");
-
-                foreach (var item in myStores)
-                    Console.WriteLine(item.NameStore);
-            }
+                Console.WriteLine("\nIl libro desiderato non esiste");
 
         }
 
@@ -188,18 +195,27 @@ namespace LibraryManager
             Console.Write("Inserisci l'id dell'autore: ");
             int idAuthor = Convert.ToInt32(Console.ReadLine());
 
-            List<Conference> myConferences = processor.ShowConferences(idAuthor);
+            bool controlExistingAuthor = processor.ExistenceAuthor(idAuthor);
 
-            if (myConferences.Capacity == 0)
-                Console.WriteLine("L'autore non ha partecipato a nessuna conferenza!\n");
+            if (controlExistingAuthor)
+            {
+
+                List<Conference> myConferences = processor.ShowConferences(idAuthor);
+
+                if (myConferences.Capacity == 0)
+                    Console.WriteLine("L'autore non ha partecipato a nessuna conferenza!\n");
+
+                else
+                {
+                    Console.WriteLine("\nLe conferenze alle quali l'autore ha partecipato sono:\n");
+
+                    foreach (var item in myConferences)
+                        Console.WriteLine(item.NameConference);
+                }
+            }
 
             else
-            {
-                Console.WriteLine("\nLe conferenze alle quali l'autore ha partecipato sono:\n");
-
-                foreach (var item in myConferences)
-                    Console.WriteLine(item.NameConference);
-            }
+                Console.WriteLine("\nL'autore desiderato non esiste");
 
         }
 

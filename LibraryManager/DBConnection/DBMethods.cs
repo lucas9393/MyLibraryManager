@@ -1,7 +1,6 @@
-﻿using System;
+﻿
 using LibraryManager.Model;
 using System.Collections.Generic;
-using System.Text;
 
 namespace LibraryManager
 {
@@ -17,5 +16,8 @@ namespace LibraryManager
 
         List<Store> ShowStoresByBook(int bookId);
         List<Conference> ShowConferencesByAuthor(int authorId);
+
+        bool VerifyExistingBook(int bookId);
+        bool VerifyExistingAuthor(int authorId);
     }
 }

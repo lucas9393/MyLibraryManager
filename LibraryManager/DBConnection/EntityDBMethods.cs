@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
 using LibraryManager.Model;
 using System.Linq;
@@ -130,8 +128,10 @@ namespace LibraryManager.DBConnection
 
         public List<Store> ShowStoresByBook(int bookId)
         {
+
             using (var context = new LibraryContext())
             {
+              
                 IEnumerable<Book> books = context.Books
                                           .Where(b => b.BookId == bookId)
                                           .Include(b => b.BookStores).ThenInclude(bs => bs.Store);
@@ -145,7 +145,6 @@ namespace LibraryManager.DBConnection
 
                 List<Store> storeList = stores.ToList();
                 return storeList;
-
 
             }
         }
@@ -171,5 +170,37 @@ namespace LibraryManager.DBConnection
 
             }
         }
+
+
+        public bool VerifyExistingBook(int bookId)
+        {
+            using (var context = new LibraryContext())
+            {
+                var book = context.Books.Find(bookId);
+
+                if (book == null)
+                    return false;
+
+                else
+                    return true;
+            }
+
+        }
+
+        public bool VerifyExistingAuthor(int authorId)
+        {
+            using (var context = new LibraryContext())
+            {
+                var book = context.Authors.Find(authorId);
+
+                if (book == null)
+                    return false;
+
+                else
+                    return true;
+            }
+
+        }
+
     }
 }

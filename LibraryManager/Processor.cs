@@ -1,12 +1,10 @@
-﻿using System;
-using LibraryManager.Model;
-using Microsoft.EntityFrameworkCore;
+﻿using LibraryManager.Model;
 using System.Collections.Generic;
 
 
 namespace LibraryManager
 {
-    class Processor  
+    class Processor
     {
         private DBMethods dBMethods;
 
@@ -30,7 +28,7 @@ namespace LibraryManager
             }
         }
 
-       
+
         public bool CreateBook(string title, string category)
         {
             using (var context = new LibraryContext())
@@ -83,5 +81,14 @@ namespace LibraryManager
             return dBMethods.ShowConferencesByAuthor(idAuthor);
         }
 
+        public bool ExistenceBook(int bookId)
+        {
+            return dBMethods.VerifyExistingBook(bookId);
+        }
+
+        public bool ExistenceAuthor(int authorId)
+        {
+            return dBMethods.VerifyExistingAuthor(authorId);
+        }
     }
 }
